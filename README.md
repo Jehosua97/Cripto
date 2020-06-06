@@ -1,4 +1,6 @@
-# python_blockchain_app
+# Sistema de Transparencia Presupuestal
+### python_blockchain_app
+Basada en la implementación [provista por IBM](https://github.com/satwikkansal/python_blockchain_app/tree/ibm_blockchain_post).
 
 A simple tutorial for developing a blockchain application from scratch in Python.
 
