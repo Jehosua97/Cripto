@@ -52,10 +52,14 @@ def submit_textarea():
     """
     post_content = request.form["content"]
     author = request.form["author"]
+    monto = request.form["monto"]
+    contrasena = request.form["contrasena"]
 
     post_object = {
         'author': author,
         'content': post_content,
+        'monto': monto,
+        'contrasena': contrasena,
     }
 
     # Submit a transaction

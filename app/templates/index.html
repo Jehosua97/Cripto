@@ -6,9 +6,12 @@
 
 	<center>
 	<form action="/submit" id="textform" method="post">
-	    <textarea name="content" rows="4" cols="50" placeholder="Just write whatever you want to..."></textarea>
+	    <textarea name="content" rows="4" cols="50" placeholder="Descripción del bien o servicio" required></textarea>
 	    <br>
-	    <input type="text" name="author" placeholder="Your name">
+	    <input type="number" name="monto" placeholder="5000" min="0" required>			<!-- Campo para ingresar monto -->
+	    <br>
+	    <input type="text" name="author" placeholder="Usuario" required>
+	    <input type="password" name="contrasena" placeholder="Contraseña" required>	<!-- Campo para ingresar contraseña -->
 	    <input type="submit" value="Post">
 	</form>
 	</center>
@@ -30,6 +33,7 @@
 	   </div>
 	   <div>
 	      <div class="post_box-body">
+	      	 <p>{{post.monto}}</p>
 	         <p>{{post.content}}</p>
 	      </div>
 	   </div>
@@ -96,6 +100,17 @@
 		    margin-right: 2px;
 		    outline: none;
 		    height: 42px;
+		}
+		/* Para ocultar las flechas en el campo de monto */
+		/* Chrome, Safari, Edge, Opera */
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+		  -webkit-appearance: none;
+		  margin: 0;
+		}
+		/* Firefox */
+		input[type=number] {
+		  -moz-appearance: textfield;
 		}
 	</style>
     </div>

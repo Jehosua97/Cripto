@@ -134,6 +134,12 @@ class Blockchain:
 
         return True
 
+infoLogin = {}
+with open("login.txt") as archivo:
+    for line in archivo:
+       (key, val) = line.split()
+       infoLogin[key] = val
+print(infoLogin)
 
 app = Flask(__name__)
 
@@ -150,17 +156,21 @@ peers = set()
 @app.route('/new_transaction', methods=['POST'])
 def new_transaction():
     tx_data = request.get_json()
-    required_fields = ["author", "content"]
+    required_fields = ["author", "content", "monto", "contrasena"]
 
     for field in required_fields:
         if not tx_data.get(field):
             return "Invalid transaction data", 404
 
-    tx_data["timestamp"] = time.time()
+    if tx_data.get("author") in infoLogin:                                      #Verificación de usuario en diccionario
+        if infoLogin[tx_data.get("author")] == tx_data.get("contrasena"):       #Verificación de login con diccionario
+            tx_data["timestamp"] = time.time()
 
-    blockchain.add_new_transaction(tx_data)
+            blockchain.add_new_transaction(tx_data)
 
-    return "Success", 201
+            return "Success", 201
+
+    return "Contraseña Inválida", 401
 
 
 # endpoint to return the node's copy of the chain.
