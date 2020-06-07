@@ -71,6 +71,22 @@ def submit_textarea():
 
     return redirect('/')
 
+@app.route('/solicitar_verificacion', methods=['POST'])
+def solicitar_verificacion():
+
+    entidad = request.form["entidades"]
+
+    post_object = {
+        'entidad': entidad,
+    }
+
+    new_tx_address = "{}/solicitar_verificaciona".format(CONNECTED_NODE_ADDRESS)
+
+    requests.post(new_tx_address,
+                  json=post_object,
+                  headers={'Content-type': 'application/json'})
+    return redirect('/')
+
 
 def timestamp_to_string(epoch_time):
     return datetime.datetime.fromtimestamp(epoch_time).strftime('%H:%M')

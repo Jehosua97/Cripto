@@ -12,24 +12,40 @@
 	    <br>
 	    <input type="text" name="author" placeholder="Usuario" required>
 	    <input type="password" name="contrasena" placeholder="Contraseña" required>	<!-- Campo para ingresar contraseña -->
-	    <input type="submit" value="Post">
+	    <input type="submit" value="Publicar">
 	</form>
 	</center>
 
 	<br>
 
-	<a href="{{node_address}}/mine" target="_blank"><button>Request to mine</button></a>
-	<a href="/"><button>Resync</button></a>
+	<a href="{{node_address}}/mine" target="_blank"><button>Minar</button></a>
+	<a href="/"><button>Sincronizar</button></a>
+
+
+	<center>																		<!-- Sección de verificación pública -->
+		<form action="/solicitar_verificacion" id="textform" method="post">
+		    <select name="entidades" id="entidades">
+		    	<option value="" disabled>Selecciona una entidad</option>
+				<option value="SAT">SAT</option>
+				<option value="SEDESOL">SEDESOL</option>
+				<option value="hotel">hotel</option>
+				<option value="Anonymous">Anonymous</option>
+			</select>
+		    <input type="submit" value="Solicitar verificación">
+		</form>
+		<br>
+		<a href="{{node_address}}/verificar" target="_blank"><button>Verificar</button></a>
+	</center>
 
 	<div style="margin: 20px;">
 
     {% for post in posts %}
     <div class="post_box">
 	   <div class="post_box-header">
-	      <div class="post_box-options"><button class="option-btn">Reply</button></div>
-	      <div style="background: rgb(0, 97, 146) none repeat scroll 0% 0%; box-shadow: rgb(0, 97, 146) 0px 0px 0px 2px;" class="post_box-avatar">{{post.author[0]}}</div>
+	      <!-- <div class="post_box-options"><button class="option-btn">Reply</button></div> -->
+	      <div style="background: rgb(0, 97, 196) none repeat scroll 0% 0%; box-shadow: rgb(0, 97, 146) 0px 0px 0px 2px;" class="post_box-avatar">{{post.author[0]}}</div>
 	      <div class="name-header">{{post.author}}</div>
-	      <div class="post_box-subtitle"> Posted at <i>{{readable_time(post.timestamp)}}</i></div>
+	      <div class="post_box-subtitle"> Publicado <i>{{readable_time(post.timestamp)}}</i></div>
 	   </div>
 	   <div>
 	      <div class="post_box-body">

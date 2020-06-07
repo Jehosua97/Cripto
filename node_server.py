@@ -5,6 +5,7 @@ import time
 from flask import Flask, request
 import requests
 
+entidadesVerif = []
 
 class Block:
     def __init__(self, index, transactions, timestamp, previous_hash, nonce=0):
@@ -193,7 +194,7 @@ def get_chain():
 def mine_unconfirmed_transactions():
     result = blockchain.mine()
     if not result:
-        return "No transactions to mine"
+        return "No hay transacciones por minar"
     else:
         # Making sure we have the longest chain before announcing to the network
         chain_length = len(blockchain.chain)
@@ -201,7 +202,7 @@ def mine_unconfirmed_transactions():
         if chain_length == len(blockchain.chain):
             # announce the recently mined block to the network
             announce_new_block(blockchain.last_block)
-        return "Block #{} is mined.".format(blockchain.last_block.index)
+        return "El bloque #{} se minó.".format(blockchain.last_block.index)
 
 
 # endpoint to add new peers to the network.
@@ -294,6 +295,32 @@ def verify_and_add_block():
 def get_pending_tx():
     return json.dumps(blockchain.unconfirmed_transactions)
 
+# endpoint para agregar entidades a verificar
+@app.route('/solicitar_verificaciona', methods=['POST'])
+def solicitar_verificaciona():
+    entidad = request.get_json()["entidad"]
+    if entidad not in entidadesVerif:
+        entidadesVerif.append(entidad)
+    return "Solicitud recibida"
+
+
+# endpoint para verificar las transacciones de la entidad,
+# así como verificar la integridad de la cadena
+@app.route('/verificar', methods=['GET'])
+def verificar():
+
+    totales = []
+    for i in range(len(entidadesVerif)):
+       totales.append(0)
+
+    for block in blockchain.chain:
+        for transaccion in block.transactions:
+            autor = transaccion.get("author")
+            if autor in entidadesVerif:
+                monto = transaccion.get("monto")
+                totales[entidadesVerif.index(autor)] += int(monto)
+
+    return str(entidadesVerif)+"<br><br>"+str(totales)
 
 def consensus():
     """
