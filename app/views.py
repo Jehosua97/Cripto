@@ -12,6 +12,19 @@ CONNECTED_NODE_ADDRESS = "http://127.0.0.1:8000"
 
 posts = []
 
+infoLogin = {}
+with open("login.txt") as archivo:
+    for line in archivo:
+       (key, val) = line.split()
+       infoLogin[key] = val
+print(infoLogin)
+
+infoMiembros = {}
+with open("miembrosEntidad.txt") as archivo:
+    for line in archivo:
+       (key, val) = line.split()
+       infoMiembros[key] = val
+print(infoMiembros)
 
 def fetch_posts():
     """
@@ -54,6 +67,13 @@ def submit_textarea():
     author = request.form["author"]
     monto = request.form["monto"]
     contrasena = request.form["contrasena"]
+
+    # Verificación de usuario y contraseña en diccionario
+    if author not in infoLogin or infoLogin[author] != contrasena:
+        return redirect('/')
+
+    #Traducción a entidad
+    author = infoMiembros[author]
 
     post_object = {
         'author': author,

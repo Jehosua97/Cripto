@@ -142,6 +142,13 @@ with open("login.txt") as archivo:
        infoLogin[key] = val
 print(infoLogin)
 
+infoPresupuesto = {}
+with open("presupuesto.txt") as archivo:
+    for line in archivo:
+       (key, val) = line.split()
+       infoPresupuesto[key] = val
+print(infoPresupuesto)
+
 app = Flask(__name__)
 
 # the node's copy of blockchain
@@ -163,15 +170,11 @@ def new_transaction():
         if not tx_data.get(field):
             return "Invalid transaction data", 404
 
-    if tx_data.get("author") in infoLogin:                                      #Verificación de usuario en diccionario
-        if infoLogin[tx_data.get("author")] == tx_data.get("contrasena"):       #Verificación de login con diccionario
-            tx_data["timestamp"] = time.time()
+    tx_data["timestamp"] = time.time()
 
-            blockchain.add_new_transaction(tx_data)
+    blockchain.add_new_transaction(tx_data)
 
-            return "Success", 201
-
-    return "Contraseña Inválida", 401
+    return "Success", 201
 
 
 # endpoint to return the node's copy of the chain.
@@ -310,6 +313,7 @@ def solicitar_verificaciona():
 def verificar():
 
     totales = []
+    resumen = []
     for i in range(len(entidadesVerif)):
        totales.append(0)
 
@@ -320,7 +324,18 @@ def verificar():
                 monto = transaccion.get("monto")
                 totales[entidadesVerif.index(autor)] += int(monto)
 
-    return str(entidadesVerif)+"<br><br>"+str(totales)
+    # se compara el total obtenido al recorrer la cadena (para cada entidad)
+    # contra el presupuesto definido en el diccionario anteriormente
+    for x in range(len(entidadesVerif)):
+        ent = entidadesVerif[x]
+        presup = int(infoPresupuesto[ent])
+        if totales[x] > presup:
+            resumen.append("<h2>{}</h2><p>Sobrepasa el presupuesto por <b>${}</b>.</p><br>".format(ent, totales[x]-presup))
+        else:
+            resumen.append("<h2>{}</h2><p>Todo en orden, con <b>${}</b> libres.</p><br>".format(ent, infoPresupuesto[ent]-totales[x]))
+
+ 
+    return ''.join(resumen)
 
 def consensus():
     """

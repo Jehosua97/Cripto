@@ -1,0 +1,4 @@
+SAT	150
+SEDESOL	200
+SEDENA	80
+Anonymous	500

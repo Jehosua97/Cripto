@@ -1,4 +1,8 @@
-SAT	123
-SEDESOL	losedes
+miembroA	123
+miembroB	123
+miembroC	123
+usuario1	contra
+usuario2	contra
+usuario3	contra
 hotel	trivago
-Anonymous	perros123
+anon	123
