@@ -62,6 +62,7 @@ class Blockchain:
             return False
 
         block.hash = proof
+        print("Proof", proof)
         self.chain.append(block)
         return True
 
@@ -102,7 +103,6 @@ class Blockchain:
             # remove the hash field to recompute the hash again
             # using `compute_hash` method.
             delattr(block, "hash")
-
             if not cls.is_valid_proof(block, block_hash) or \
                     previous_hash != block.previous_hash:
                 result = False
@@ -304,31 +304,58 @@ def solicitar_verificaciona():
 # así como verificar la integridad de la cadena
 @app.route('/verificar', methods=['GET'])
 def verificar():
+    result = True
+    previous_hash = "0"
 
-    totales = []
-    resumen = []
-    for i in range(len(entidadesVerif)):
-       totales.append(0)
+    for block in blockchain.chain[1:]:
+        block_hash = block.hash
+        # remove the hash field to recompute the hash again
+        # using `compute_hash` method.
+        
+        # print("Hash antes:", block.compute_hash())
+        
+        delattr(block, "hash")
 
-    for block in blockchain.chain:
-        for transaccion in block.transactions:
-            autor = transaccion.get("author")
-            if autor in entidadesVerif:
-                monto = transaccion.get("monto")
-                totales[entidadesVerif.index(autor)] += int(monto)
+        print(block.compute_hash())
+        # print("Hash almacenado: ", block_hash)
 
-    # se compara el total obtenido al recorrer la cadena (para cada entidad)
-    # contra el presupuesto definido en el diccionario anteriormente
-    for x in range(len(entidadesVerif)):
-        ent = entidadesVerif[x]
-        presup = int(infoPresupuesto[ent])
-        if totales[x] > presup:
-            resumen.append("<h2>{}</h2><p>Sobrepasa el presupuesto por <b>${}</b>.</p><br>".format(ent, totales[x]-presup))
-        else:
-            resumen.append("<h2>{}</h2><p>Todo en orden, con <b>${}</b> libres.</p><br>".format(ent, infoPresupuesto[ent]-totales[x]))
 
- 
-    return ''.join(resumen)
+        if not blockchain.is_valid_proof(block, block_hash):
+            result = False
+            
+        block.hash, previous_hash = block_hash, block_hash
+
+    if result:
+        totales = []
+        resumen = ["<b>Integridad verificada</b><br>"]
+        for i in range(len(entidadesVerif)):
+           totales.append(0)
+
+        for block in blockchain.chain:
+            for transaccion in block.transactions:
+                autor = transaccion.get("author")
+                if autor in entidadesVerif:
+                    monto = transaccion.get("monto")
+                    totales[entidadesVerif.index(autor)] += int(monto)
+
+        # se compara el total obtenido al recorrer la cadena (para cada entidad)
+        # contra el presupuesto definido en el diccionario anteriormente
+        for x in range(len(entidadesVerif)):
+            ent = entidadesVerif[x]
+            presup = int(infoPresupuesto[ent])
+            if totales[x] > presup:
+                resumen.append("<h2>{}</h2><p>Sobrepasa el presupuesto por <b>${}</b>.</p><br>".format(ent, totales[x]-presup))
+            else:
+                resumen.append("<h2>{}</h2><p>Todo en orden, con <b>${}</b> libres.</p><br>".format(ent, infoPresupuesto[ent]-totales[x]))
+
+     
+        return ''.join(resumen)
+    else:
+        return "<h2>Integridad comprometida</h2>"
+
+  # return json.dumps({"length": len(chain_data),
+  #                    "chain": chain_data,
+  #                    "peers": list(peers)})
 
 def consensus():
     """
