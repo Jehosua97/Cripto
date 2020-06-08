@@ -135,13 +135,6 @@ class Blockchain:
 
         return True
 
-infoLogin = {}
-with open("login.txt") as archivo:
-    for line in archivo:
-       (key, val) = line.split()
-       infoLogin[key] = val
-print(infoLogin)
-
 infoPresupuesto = {}
 with open("presupuesto.txt") as archivo:
     for line in archivo:
