@@ -198,7 +198,7 @@ def mine_unconfirmed_transactions():
         if chain_length == len(blockchain.chain):
             # announce the recently mined block to the network
             announce_new_block(blockchain.last_block)
-        return "El bloque #{} se minó.".format(blockchain.last_block.index)
+        return "El bloque #{} se mino.".format(blockchain.last_block.index)
 
 
 # endpoint to add new peers to the network.
@@ -301,7 +301,7 @@ def solicitar_verificaciona():
 
 
 # endpoint para verificar las transacciones de la entidad,
-# así como verificar la integridad de la cadena
+# asi como verificar la integridad de la cadena
 @app.route('/verificar', methods=['GET'])
 def verificar():
     result = True

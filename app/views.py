@@ -68,11 +68,11 @@ def submit_textarea():
     monto = request.form["monto"]
     contrasena = request.form["contrasena"]
 
-    # Verificación de usuario y contraseña en diccionario
+    # Verificacion de usuario y contrasena en diccionario
     if author not in infoLogin or infoLogin[author] != contrasena:
         return redirect('/')
 
-    #Traducción a entidad
+    #Traduccion a entidad
     author = infoMiembros[author]
 
     post_object = {
