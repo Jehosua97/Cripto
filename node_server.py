@@ -346,7 +346,7 @@ def verificar():
             if totales[x] > presup:
                 resumen.append("<h2>{}</h2><p>Sobrepasa el presupuesto por <b>${}</b>.</p><br>".format(ent, totales[x]-presup))
             else:
-                resumen.append("<h2>{}</h2><p>Todo en orden, con <b>${}</b> libres.</p><br>".format(ent, infoPresupuesto[ent]-totales[x]))
+                resumen.append("<h2>{}</h2><p>Todo en orden, con <b>${}</b> libres.</p><br>".format(ent, presup-totales[x]))
 
      
         return ''.join(resumen)
