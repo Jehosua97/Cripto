@@ -79,7 +79,6 @@ def submit_textarea():
         'author': author,
         'content': post_content,
         'monto': monto,
-        'contrasena': contrasena,
     }
 
     # Submit a transaction
@@ -95,7 +94,7 @@ def submit_textarea():
 def solicitar_verificacion():
 
     entidad = request.form["entidades"]
-
+    
     post_object = {
         'entidad': entidad,
     }

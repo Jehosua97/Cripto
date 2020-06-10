@@ -157,7 +157,7 @@ peers = set()
 @app.route('/new_transaction', methods=['POST'])
 def new_transaction():
     tx_data = request.get_json()
-    required_fields = ["author", "content", "monto", "contrasena"]
+    required_fields = ["author", "content", "monto"]
 
     for field in required_fields:
         if not tx_data.get(field):
@@ -295,8 +295,16 @@ def get_pending_tx():
 @app.route('/solicitar_verificaciona', methods=['POST'])
 def solicitar_verificaciona():
     entidad = request.get_json()["entidad"]
-    if entidad not in entidadesVerif:
+
+    if entidad == "0":
+        del entidadesVerif[:]
+        for valor in infoPresupuesto.keys():
+            entidadesVerif.append(valor)
+        return "Solicitud recibida"
+
+    elif entidad not in entidadesVerif:
         entidadesVerif.append(entidad)
+
     return "Solicitud recibida"
 
 
@@ -348,17 +356,18 @@ def verificar():
             ent = entidadesVerif[x]
             presup = int(infoPresupuesto[ent])
             if totales[x] > presup:
-                resumen.append("<h2>{}</h2><p>Sobrepasa el presupuesto (${}) por <b>${}</b>.</p>".format(ent, presup, totales[x]-presup))
+                resumen.append("<h2>{}</h2><p>Presupuesto: ${}</p><p>Excede por <b>${}</b>.</p>".format(ent, presup, totales[x]-presup))
                 resumen.append(transacciones[x])
                 resumen.append("<br>")
             else:
-                resumen.append("<h2>{}</h2><p>Presupuesto (${}) en orden. <b>${}</b> libres.</p>".format(ent, presup, presup-totales[x]))
+                resumen.append("<h2>{}</h2><p>Presupuesto: ${}</p><p>Con <b>${}</b> libres.</p>".format(ent, presup, presup-totales[x]))
                 resumen.append(transacciones[x])
                 resumen.append("<br>")
 
-     
+        del entidadesVerif[:]
         return ''.join(resumen)
     else:
+        del entidadesVerif[:]
         return "<h2>Integridad comprometida</h2>"
 
   # return json.dumps({"length": len(chain_data),
