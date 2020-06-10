@@ -326,16 +326,20 @@ def verificar():
         block.hash, previous_hash = block_hash, block_hash
 
     if result:
+        transacciones = []
         totales = []
         resumen = ["<b>Integridad verificada</b><br>"]
         for i in range(len(entidadesVerif)):
            totales.append(0)
+           transacciones.append("")
 
         for block in blockchain.chain:
             for transaccion in block.transactions:
                 autor = transaccion.get("author")
                 if autor in entidadesVerif:
                     monto = transaccion.get("monto")
+                    descripcion = transaccion.get("content")
+                    transacciones[entidadesVerif.index(autor)]+=("<p><b>{}</b> - ${}</p>".format(descripcion, monto))
                     totales[entidadesVerif.index(autor)] += int(monto)
 
         # se compara el total obtenido al recorrer la cadena (para cada entidad)
@@ -344,9 +348,13 @@ def verificar():
             ent = entidadesVerif[x]
             presup = int(infoPresupuesto[ent])
             if totales[x] > presup:
-                resumen.append("<h2>{}</h2><p>Sobrepasa el presupuesto por <b>${}</b>.</p><br>".format(ent, totales[x]-presup))
+                resumen.append("<h2>{}</h2><p>Sobrepasa el presupuesto (${}) por <b>${}</b>.</p>".format(ent, presup, totales[x]-presup))
+                resumen.append(transacciones[x])
+                resumen.append("<br>")
             else:
-                resumen.append("<h2>{}</h2><p>Todo en orden, con <b>${}</b> libres.</p><br>".format(ent, presup-totales[x]))
+                resumen.append("<h2>{}</h2><p>Presupuesto (${}) en orden. <b>${}</b> libres.</p>".format(ent, presup, presup-totales[x]))
+                resumen.append(transacciones[x])
+                resumen.append("<br>")
 
      
         return ''.join(resumen)
