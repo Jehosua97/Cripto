@@ -11,7 +11,7 @@
 
 Basada en la implementación [provista por IBM](https://github.com/satwikkansal/python_blockchain_app/tree/ibm_blockchain_post).
 
-## Instrucciones de ejecución en sistema Linux
+## Instrucciones de ejecución
 
 Clonar el proyecto,
 
@@ -29,7 +29,10 @@ $ pip install -r requirements.txt
 Para iniciar un blockchain node server,
 
 ```sh
-# Para ejecutar desde Windows: https://flask.palletsprojects.com/en/1.1.x/cli/#application-discovery
+# Para ejecutar desde Linux:
+$ set FLASK_APP=node_server.py
+$ flask run --port 8000
+# Para ejecutar desde Windows:
 $ export FLASK_APP=node_server.py
 $ flask run --port 8000
 ```
