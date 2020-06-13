@@ -3,15 +3,15 @@
 ### Facultad de Ingeniería
 ### Criptografía. Grupo: 2
 ### Integrantes:
-Aguilar Luna Gabriel Daniel
-Chavira Tapia Andrés Uriel
-Jiménez Juárez Jesús
-Joya Venegas Jehosua Alan
-Ramírez Villa Brandon Alberto
+#### Aguilar Luna Gabriel Daniel
+#### Chavira Tapia Andrés Uriel
+#### Jiménez Juárez Jesús
+#### Joya Venegas Jehosua Alan
+#### Ramírez Villa Brandon Alberto
 
 Basada en la implementación [provista por IBM](https://github.com/satwikkansal/python_blockchain_app/tree/ibm_blockchain_post).
 
-## Instrucciones
+## Instrucciones de ejecución en sistema Linux
 
 Clonar el proyecto,
 
@@ -42,7 +42,7 @@ $ python run_app.py
 
 Listo. Para operar la aplicación entre en el enlace: [http://localhost:5000](http://localhost:5000).
 
-##Ejemplos
+## Ejemplos
 
 1. Pantalla principal
 
