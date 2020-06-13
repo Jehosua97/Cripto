@@ -33,8 +33,8 @@ Para iniciar un blockchain node server,
 $ export FLASK_APP=node_server.py
 $ flask run --port 8000
 # Para ejecutar desde Windows:
-$ set FLASK_APP=node_server.py
-$ flask run --port 8000
+> set FLASK_APP=node_server.py
+> flask run --port 8000
 ```
 
 Ejecutar la aplicación en una terminal diferente,
