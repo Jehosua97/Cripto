@@ -22,7 +22,7 @@ $ git clone https://github.com/Jehosua97/Cripto.git
 Luego de colocarse en la direccion donde se descargo el reposirtorio instalar las dependencias,
 
 ```sh
-$ cd python_blockchain_app
+$ cd Cripto
 $ pip install -r requirements.txt
 ```
 
