@@ -62,7 +62,7 @@ Listo. Para operar la aplicación entre en el enlace: [http://localhost:5000](ht
 
 ## Conectar diferentes dispositivos
 
-Es posible crear Publicaciones desde otros  dispositivos conectados en la misma red LAN, es necesario conocer la ip del dispositivo que actua como servidor. Para esto es necesario conocer la dirección ip del dispositivo en el que se  esta ejecutando la aplicacion. Se puede hacer de las siguientes maneras:
+Es posible crear Publicaciones desde otros  dispositivos conectados en la misma red LAN, es necesario conocer la ip del dispositivo que actua como servidor. Para conocer la dirección ip del dispositivo en el que se  esta ejecutando la aplicacion. Se puede hacer de las siguientes maneras:
 
 ```sh
 # Desde Linux
@@ -74,3 +74,5 @@ $ ifconfig
 Finalmente desde el navegador del otro dispositivo se ingresa al puerto 5000 de dicha ip (se muestra un ejemplo desde un dispositivo movil)
 
 ![image.png](https://github.com/Jehosua97/Cripto/blob/master/screenshots/movil.jpeg)
+
+Estos dispositivos solo pueden hacer Publicaciones y Sincronizar su información con la cadena, sin embargo no pueden ni Verificar ni solicitar Minar, esto solo es posible desde el equipo que ejecuta la aplicación.
