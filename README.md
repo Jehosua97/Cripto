@@ -46,16 +46,16 @@ Listo. Para operar la aplicación entre en el enlace: [http://localhost:5000](ht
 
 1. Pantalla principal
 
-![image.png](https://github.com/Jehosua97/Cripto/tree/master/screenshots/Screen1.png)
+![image.png](https://github.com/Jehosua97/Cripto/blob/master/screenshots/Screen1.png)
 
 2. Transacción
 
-![image.png](https://github.com/Jehosua97/Cripto/tree/master/screenshots/transaccion.png)
+![image.png](https://github.com/Jehosua97/Cripto/blob/master/screenshots/transaccion.png)
 
 3. Selección de entidad a verificar
 
-![image.png](https://github.com/Jehosua97/Cripto/tree/master/screenshots/selectVerify.png)
+![image.png](https://github.com/Jehosua97/Cripto/blob/master/screenshots/selectVerify.png)
 
 4. Verificación
 
-![image.png](https://github.com/Jehosua97/Cripto/tree/master/screenshots/verification.png)
+![image.png](https://github.com/Jehosua97/Cripto/blob/master/screenshots/verification.png)
