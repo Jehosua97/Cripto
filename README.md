@@ -59,3 +59,18 @@ Listo. Para operar la aplicación entre en el enlace: [http://localhost:5000](ht
 4. Verificación
 
 ![image.png](https://github.com/Jehosua97/Cripto/blob/master/screenshots/verification.png)
+
+## Conectar diferentes dispositivos
+
+Es posible crear Publicaciones desde otros  dispositivos conectados en la misma red LAN, es necesario conocer la ip del dispositivo que actua como servidor. Para esto es necesario conocer la dirección ip del dispositivo en el que se  esta ejecutando la aplicacion. Se puede hacer de las siguientes maneras:
+
+```sh
+# Desde Linux
+$ ifconfig
+# Desde Windows
+> ipconfig
+```
+
+Finalmente desde el navegador del otro dispositivo se ingresa al puerto 5000 de dicha ip (se muestra un ejemplo desde un dispositivo movil)
+
+![image.png](https://github.com/Jehosua97/Cripto/blob/master/screenshots/movil.jpeg)
